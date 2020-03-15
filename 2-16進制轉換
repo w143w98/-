@@ -1,0 +1,117 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+void TrunTen(char[], int, int);
+void TrunTenDecimal(char[], int, int, int, int);
+void TrunTenCon(char[], int, int, int, int);
+void TenToAny(char[], int, int[]);
+double sum = 0;
+int main(void) {
+	char x[99], y[99];
+	int in = 0, out = 0;
+	int i = 0;
+	int z[99];
+	printf("輸入初始的基底(2-16):");
+	scanf("%d", &in); 
+	if (in > 16 || in < 2) {
+		printf("輸入錯誤\n");
+		system("pause"); return 0;
+	}
+	printf("輸入要轉換的基底(2-16):");
+	scanf("%d", &out); 
+	if (out > 16 || out < 2) {
+		printf("輸入錯誤\n");
+		system("pause"); return 0;
+	}
+	printf("輸入要轉換的X值:");
+	scanf("%s", x);
+	while (x[i] != NULL) i++; //判斷陣列長度
+	for (int j = 0; j < i; j++) {
+		if (x[j] > in) {
+			printf("輸入錯誤\n");
+			system("pause"); return 0;
+		}
+	}
+	TrunTen(x, i, in);
+	TenToAny(y, out, z);
+	system("pause"); return 0;
+}
+
+void TrunTen(char x[99], int i, int in)
+{//十進位
+	int dot = i; //找小數點位置
+	for (int j = 0; j < i; j++) { //轉換成數字型態 
+		if (x[j] > 47 && x[j] < 58) {
+			x[j] = x[j] - 48;
+		}
+		else if (x[j] > 64 && x[j] < 91) {
+			x[j] = x[j] - 55;
+		}
+		else if (x[j] > 96 && x[j] < 123) {
+			x[j] = x[j] - 87;
+		}
+	}
+	for (int j = 0; j < i; j++) {
+		if (x[j] == 46) dot = j;
+	}
+	for (int j = 0; j < i; j++) {
+		if(j < dot) TrunTenCon(x, j, i, in, dot);
+		else if (j > dot) TrunTenDecimal(x, j, i, in, dot);
+	}
+
+
+}
+
+void TrunTenCon(char x[99], int j, int i, int in, int dot)
+{//整數轉10進制
+	double num = 0;
+		num = x[j];
+		for (int z = dot - j - 1; z > 0; z--) num *= in;
+		sum += num;
+}
+
+void TrunTenDecimal(char x[99], int j, int i, int in, int dot)
+{//小數點後轉10進制
+	double num = 0;
+		num = x[j];
+		for (int z = j - dot; z > 0; z--) {
+			num /= in;
+		}
+		sum += num;
+		
+}
+
+void TenToAny(char y[99], int out, int z[99])
+{
+	int num = sum, count = 0;
+	double numdot = sum - num;//小數
+	if (num == 0) printf("0");
+	while (num != 0) {
+		z[count] = num % out;
+		num /= out;
+		count++;
+	}
+	for (int i = 0; i < count; i++) {
+		if (z[i] == i + 10) y[i] = i + 65;
+		else y[i] = z[i];
+	}
+
+	for (int i = count - 1; i >= 0; i--) { //整數部分 反轉
+		if (y[i] > 9) printf("%c", y[i]);
+		else printf("%d", y[i]);
+	}
+	printf(".");
+
+	for (int i = count; i < count + 5; i++) { //小數部分
+		z[i] = (int)(numdot * out);
+		numdot = numdot * out - z[i];
+		if (z[i] == i + 10) y[i] = i + 65;
+		else y[i] = z[i];	
+	} 
+	if (z[count + 3] > 4) z[count + 2] += 1;
+	if (z[count + 2] == count + 2 + 10) y[count + 2] = count + 2 + 65;
+	else y[count + 2] = z[count + 2];
+	for (int i = count; i < count + 3; i++) printf("%d", y[i]);
+}
