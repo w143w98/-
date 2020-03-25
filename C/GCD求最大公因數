@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+int F(int, int);
+void sw(int *x, int *y);
+int main(void)
+{
+	int x = 0, y = 0;
+	printf("請輸入兩個數來判斷最大公因數 "); scanf("%d %d", &x, &y);
+	sw(&x, &y);
+	printf("GCD( %d, %d ) = %d", x, y, F(x, y));
+	system("pause"); return 0;
+}
+int F(int x,int y)
+{
+	int m = 0, num = 0;
+	if (x%y != 0) {
+		m = x % y;
+		F(y, m);
+	}
+	else return y;
+}
+void sw(int *x, int *y)
+{
+	int temp = 0;
+	if (*x < *y) {
+		temp = *x; *x = *y; *y = temp;
+	}
+	return 0;
+}
