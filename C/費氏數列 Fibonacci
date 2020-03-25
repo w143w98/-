@@ -1,0 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+int F(int);
+int main(void)
+{
+	int x = 0;
+	printf("請輸入費氏數列第幾位 "); scanf("%d", &x);
+	printf("Fibonacci %d th = %d", x, F(x));
+	system("pause"); return 0;
+}
+int F(int x)
+{
+	if (x == 0) return 0;
+	else if (x == 1 || x == 2) return 1;
+	else return F(x - 2) + F(x - 1);
+}
