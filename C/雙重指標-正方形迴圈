@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+int main(void)
+{
+	int **x;
+	int n = 0;
+	scanf("%d", &n);
+	x = (int**)malloc(sizeof(int)*n);
+	for (int i = 0; i < n; i++) *(x + i) = (int*)malloc(sizeof(int)*n*n);
+
+	for (int i = 0; i < n; i++) { 
+		for (int j = 0; j < n; j++) *(*(x + i) + j) = 1;
+	}
+
+	for (int k = 1; k <= n / 2; k++) {
+		for (int i = k; i < n - k; i++) {
+			for (int j = k; j < n - k; j++) {
+				*(*(x + i) + j) += 1;
+			}
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) printf("%2d", *(*(x + i) + j));
+		printf("\n");
+	}
+
+	for (int i = 0; i < n; i++) free(*(x + i));
+	free(x);
+	return 0;
+}
