@@ -1,0 +1,33 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+void sort(int*, int*, int*);
+void temp(int*, int*);
+int main(int argc,char *argv[])
+{
+	int a, b, c;
+	scanf("%d %d %d", &a, &b, &c);
+	printf("before sort : %d %d %d\n", a, b, c);
+	sort(&a, &b, &c);
+	printf("After sort : %d %d %d\n", a, b, c);
+	return 0;
+}
+void sort(int *a, int *b, int *c)
+{
+	if (*a < *b && *a < *c) {
+		if (*b > *c) temp(&*b, &*c);
+	}
+	else if (*b < *a && *b < *c) {
+		temp(&*a, &*b);
+		if (*b > *c) temp(&*b, &*c);
+	}
+	else {
+		temp(&*a, &*c);
+		if (*b > *c) temp(&*b, &*c);
+	}
+}
+void temp(int *x, int *y)
+{
+	int tempx = 0;
+	tempx = *x; *x = *y; *y = tempx;
+}
