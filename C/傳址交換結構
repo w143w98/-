@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 struct Student {
 	int ID;
 	char name[20];
@@ -19,9 +20,7 @@ void swapStudent(struct Student *objA, struct Student *objB)
 {
 	struct Student swap;
 	swap.ID = objA->ID; objA->ID = objB->ID; objB->ID = swap.ID;
-	for (int i = 0; i < 20; i++) {
-		swap.name[i] = objA->name[i]; objA->name[i] = objB->name[i]; objB->name[i] = swap.name[i];
-	}
+	strcpy(swap.name, objA->name); strcpy(objA->name, objB->name); strcpy(objB->name, swap.name);
 	
 }
 void printStd(const struct Student std_A, const struct Student std_B)
