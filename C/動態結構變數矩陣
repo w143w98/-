@@ -1,0 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+struct Student {
+	int ID;
+	char name[20];
+};
+void creatStd(int);
+int main(void)
+{
+	creatStd(8);
+	getchar();
+}
+void creatStd(int number) {
+	struct Student *students = (struct Student*)malloc(sizeof(struct Student*)*number);
+	char ch = 'A';
+	srand(time(NULL));
+
+	for (int i = 0; i < number; i += 1) {
+		students[i].ID = (rand() % 999) + 0;
+		sprintf(students[i].name, "%c%4d", ch , students[i].ID);
+		ch++;
+	}
+	for (int i = 0; i < number; i++) {
+		printf("i = %2d : ID = %4d, Name = %6s\n", i, students[i].ID, students[i].name);
+	}
+}
