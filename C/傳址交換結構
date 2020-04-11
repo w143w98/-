@@ -1,0 +1,31 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+struct Student {
+	int ID;
+	char name[20];
+};
+void swapStudent(struct Student*, struct Student*);
+void printStd(const struct Student, const struct Student);
+int main(void)
+{
+	struct Student student_A = { 1,"Galahad" }, student_B = { 48763,"TenSecond" };
+	printStd(student_A, student_B);
+	swapStudent(&student_A, &student_B);
+	printStd(student_A, student_B);
+	return 0;
+}
+void swapStudent(struct Student *objA, struct Student *objB)
+{
+	struct Student swap;
+	swap.ID = objA->ID; objA->ID = objB->ID; objB->ID = swap.ID;
+	for (int i = 0; i < 20; i++) {
+		swap.name[i] = objA->name[i]; objA->name[i] = objB->name[i]; objB->name[i] = swap.name[i];
+	}
+	
+}
+void printStd(const struct Student std_A, const struct Student std_B)
+{
+	printf("student A ID = %5d, Name = %10s\n", std_A.ID, std_A.name);
+	printf("student B ID = %5d, Name = %10s\n", std_B.ID, std_B.name);
+}
