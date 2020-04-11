@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+void CallByValue_1_PlusTo_500(int);
+void CallByAddress_1_PlusTo_500(int*);
+int main(void)
+{
+	int V = 10, A = 16;
+	printf("Before Calling Function \t V = %7d , A = %7d\n", V, A);
+	CallByValue_1_PlusTo_500( V );
+	CallByAddress_1_PlusTo_500( &A );
+	printf("After Calling Function \t\t V = %7d , A = %7d\n\n", V, A);
+	return system("pause");
+}
+void CallByValue_1_PlusTo_500(int n)
+{
+	return n = (1 + 500) * 500 / 2;
+}
+void CallByAddress_1_PlusTo_500(int *n)
+{
+	return *n = (1 + 500) * 500 / 2;
+}
