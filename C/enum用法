@@ -1,0 +1,18 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+enum Month{January,February,March,April,May,June,July,Augest,September,October,November,December};
+void AddAllMonth() {
+	int days = 0;
+	int day[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+	for (enum Month month = January; month <= December; month += 1) {
+		days += day[month];
+	}
+	printf("%3d days a year\n", days);
+}
+int main(void)
+{
+	printf("===================Quiz.5===================\n");
+	AddAllMonth();
+	system("pause"); return 0;
+}
