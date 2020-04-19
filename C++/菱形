@@ -1,0 +1,18 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+int main(void)
+{
+	int n = 7; //行數
+	for (int i = 1; i <= n / 2 + 1; i++) {//上半
+		for (int x = n / 2 + 1 - i; x > 0; x--) cout << ' ';
+		for (int y = i * 2 - 1; y > 0; y--) cout << '*';
+		cout << endl;
+	}
+	for (int i = 1; i <= n / 2; i++) {//下半
+		for (int x = i; x > 0; x--) cout << ' ';
+		for (int y = n - i * 2; y > 0; y--) cout << '*';
+		cout << endl;
+	}
+	system("pause");
+}
