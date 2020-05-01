@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+#include <conio.h>
+using namespace std;
+class CGuessing
+{	
+private:
+	int com, comtimes;
+	int pla, platimes;
+public:
+	CGuessing() { com = 0, pla = 0, comtimes = 0, platimes = 0; }
+	void Generate();
+	int Judge();
+	void show();
+};
+void CGuessing::Generate() {
+	com = rand() % 3 + 1;
+}
+int CGuessing::Judge() {
+	while (1) {
+		Generate();
+		cout << "1.剪刀 2.石頭 3.布 " << endl;
+		cin >> pla;
+		if(pla == com) {}
+		else if ((pla - com) == 1 || (pla - com) == -2) platimes++;
+		else comtimes++;
+		if (platimes > 2) return -1;
+		else if (comtimes > 2) return 1;
+	}
+}
+void CGuessing::show() {
+	cout << "玩家勝利次數 " << platimes << endl;
+	cout << "電腦勝利次數 " << comtimes << endl;
+}
+int main(void)
+{
+	CGuessing Game;
+	int result = 0;
+	cout << "遊戲開始" << endl;
+	result = Game.Judge();
+	if(result == -1) cout << "玩家獲勝" << endl;
+	else cout << "電腦獲勝" << endl;
+	Game.show();
+	cout << "遊戲結束" << endl;
+	system("pause"); return 0;
+}
