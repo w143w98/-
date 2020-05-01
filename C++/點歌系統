@@ -6,7 +6,6 @@ class Service
 {	
 private:
 	char SongName[100][100] = { ' ' };
-
 public:
 	void Addsong(int);
 	void ShowSong(int);
