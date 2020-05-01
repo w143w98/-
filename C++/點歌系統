@@ -1,0 +1,69 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+class Service
+{	
+private:
+	char SongName[100][100] = { ' ' };
+
+public:
+	void Addsong(int);
+	void ShowSong(int);
+	void Sorting(int);
+	void SelectSong(int);
+};
+void Service::Addsong(int times) { cin >> SongName[times]; }
+void Service::ShowSong(int times) {
+	for (int i = 0; i < times; i++) cout << "第" << (i + 1) << "首 " << SongName[i] << endl;
+}
+void Service::Sorting(int times) {
+	for (int i = 0; i < times; i++) {
+		for (int j = 0; j < i; j++) {
+			if (strcmp(SongName[i], SongName[j]) < 0) {
+				char temp[100][100];
+				strcpy(temp[0], SongName[i]); strcpy(SongName[i], SongName[j]); strcpy(SongName[j], temp[0]);
+			}
+		}
+	}
+	for (int i = 0; i < times; i++) cout << "第" << (i + 1) << "首 " << SongName[i] << endl;
+}
+void Service::SelectSong(int times) {
+	int x;
+	cout << "請選擇第幾首歌曲" << endl;
+	cin >> x;
+	cout << "開始播放   " << SongName[x - 1] << endl;
+}
+int main(void)
+{
+	int x, times = 0;
+	Service Song;
+	while (1) {
+		cout << "1:新增歌曲,2顯示歌曲,3.歌曲排序,4.選擇播歌,5.結束程式" << endl;
+		cin >> x; 
+		switch (x)
+		{
+		case 1:
+			cout << "增加新歌,請輸入歌名" << endl;
+			Song.Addsong(times); times++;
+			break;
+		case 2:
+			Song.ShowSong(times);
+			break;
+		case 3:
+			Song.Sorting(times);
+			break;
+		case 4:
+			cout << "選擇播歌" << endl;
+			Song.ShowSong(times);
+			Song.SelectSong(times);
+			break;
+		case 5:
+			cout << "結束程式" << endl;
+			system("pause"); return 0;
+			break;
+		}
+	}
+	
+	system("pause"); return 0;
+}
