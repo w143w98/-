@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+class CVector
+{
+private:
+	float m_fx = 0;
+	float m_fy = 0;
+	float m_fNorm = 0;
+
+public:
+	CVector(float fx = 0, float fy = 0) {
+		if (fy == true) { m_fx = fx; m_fy = fy; }
+		else { m_fx = fx; m_fy = fx; }
+	}
+	void Show() { //第一題
+		cout << "(" << m_fx << "," << m_fy << ")" << endl;
+	}
+	float Dist() { //第二題
+		return m_fNorm = sqrt(m_fx*m_fx + m_fy*m_fy);
+	}
+	void ShowDist() {
+		cout << Dist() << endl;
+	}
+	float Dist(const CVector &v) { //第三題
+		return this->m_fNorm - v.m_fNorm;
+	}
+	float operator*(const CVector &v) {
+		return this->m_fx * v.m_fx + this->m_fy * v.m_fy;
+	}
+	float operator-(const CVector &v) {
+		return abs(this->m_fNorm - v.m_fNorm);
+	}
+	float operator+(const CVector &v) {
+		return this->m_fNorm + v.m_fNorm;
+	}
+	bool operator>(const CVector &v) {
+		if (this->m_fNorm > v.m_fNorm) return true;
+		else return false;
+	}
+	bool operator>(const float &fNorm) {
+		if (this->m_fNorm > fNorm) return true;
+		else return false;
+	}
+	CVector Compare(CVector v) { //第五題
+		if (this->m_fNorm > v.m_fNorm) return *this;
+		else return v;
+	}
+};
+int main(void)
+{
+	CVector v1;
+	CVector v2(1);
+	CVector v3(1, 3);
+	CVector v4 = v2;
+	v1.Show(); v2.Show(); v3.Show(); v4.Show(); cout << endl; //第一題
+	v1.ShowDist(); v2.ShowDist(); v3.ShowDist(); v4.ShowDist(); cout << endl; //第二題
+	cout << (v2 * v3) << endl << (v2 - v3) << endl << (v2 + v3) << endl << (v2 > v3) << endl << (v3 > 5) << endl; //第四題
+	v2.Compare(v3).Show();
+	system("pause");
+}
