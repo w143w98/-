@@ -1,0 +1,4 @@
+rand() -> 產生任意亂數
+(float)rand()/RAND_MAX -> 產生0~1之間的亂數
+rand()%10+1 -> 產生 1~10的亂數
+#include <time.h> srand(time(NULL)) -> 每次執行程式的亂數都會不同
