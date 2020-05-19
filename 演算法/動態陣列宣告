@@ -1,0 +1,12 @@
+C語言
+資料型態 *ptr;
+ptr = (資料型態*)malloc(sizeof(資料型態)*n);
+e.g.  
+struct Student *students = (struct Student*)malloc(sizeof(struct Student*)*number);
+
+C++
+資料型態 *ptr;
+ptr = new 資料型態[n];
+e.g.
+double ptr;
+ptr = new double[2];
