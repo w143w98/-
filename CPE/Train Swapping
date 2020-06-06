@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int main(void)
+{
+	int n;
+	cin>>n;
+	while(n--){
+		int count,x[100],num=0;
+		cin>>count;
+		for(int i=0;i<count;i++) cin>>x[i];
+		for(int i=0;i<count;i++){
+			for(int j=i+1;j<count;j++){
+				if(x[i]>x[j]){
+					swap(x[i],x[j]);
+					num++;
+				}
+			}
+		}
+		cout<<"Optimal train swapping takes "<<num<<" swaps."<<endl;
+	} 
+}
+//由小到大排序
